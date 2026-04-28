@@ -1,0 +1,4 @@
+interface:
+  display_name: "ServiceNow FRD Generator"
+  short_description: "Turn notes or BRDs into FRD .docx files"
+  default_prompt: "Use $servicenow-frd-generator to turn this BRD into a structured FRD .docx with ServiceNow-specific details where applicable."
