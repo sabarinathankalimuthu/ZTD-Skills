@@ -1,60 +1,56 @@
 ---
 name: servicenow-frd-generator
-description: Convert user input into a fully structured Functional Requirement Document (FRD) delivered as a Word (.docx) file. Use when Codex receives plain text requirements, rough notes, meeting notes, uploaded BRDs, or partial business requirements and needs to transform them into a professional FRD or functional requirement document with the standard 16 sections: title page, overview, functional overview, system architecture, functional requirements, use cases, UI/UX requirements, data requirements, business rules, integration requirements, security requirements, non-functional requirements, reporting requirements, testing considerations, traceability matrix, and version history. Apply this skill especially for ServiceNow work such as ITSM, HRSD, CSM, platform workflows, or module design where the FRD should include ServiceNow-specific tables, roles, business rules, integrations, and implementation assumptions where applicable.
+description: Use whenever the user provides raw requirements, meeting notes, a BRD, or partial business inputs and wants a Functional Requirement Document (FRD) as a Word (.docx) file. Triggers include phrases like "write an FRD", "generate functional requirements", "turn this into an FRD", or uploads of rough notes and BRDs — especially for ServiceNow modules such as ITSM, HRSD, CSM, or platform workflows.
+argument-hint: "[module or process name]"
 ---
 
-# ServiceNow FRD Generator
+## Usage
 
-## Overview
+IMPORTANT: _Always_ read the section reference before drafting content. Skipping it risks producing incomplete or inconsistent sections.
 
-Turn incomplete requirement inputs into a polished FRD that is ready for stakeholder review. Preserve source facts, fill structural gaps with explicit assumptions or `TBD` markers, and produce the final deliverable as a `.docx` file rather than stopping at notes or markdown.
+To check the minimum content checklist for all 16 FRD sections:
+```bash
+cat references/frd-sections.md
+```
 
-## Workflow
+To identify the source material type before processing:
+- Plain text / bullet notes → extract business objective, actors, scope, constraints, and integrations directly
+- Uploaded BRD or document → read it fully, then normalize into FRD structure
+- Mixed artifacts → consolidate into a single source truth before drafting
 
-1. Identify the source material.
-2. Normalize the requirements into a complete FRD structure.
-3. Enrich the content with ServiceNow-specific detail when the domain warrants it.
-4. Render the FRD as a Word document and verify the output before delivering it.
+To produce the Word deliverable after drafting:
+- Use the Documents skill (`docx`) to render and visually verify the `.docx` output
+- Name the file to reflect the module, e.g. `Incident-Management-FRD.docx` or `Employee-Onboarding-FRD.docx`
 
-## Read The Input
+## What to Include
 
-- Accept plain text, bullet lists, pasted notes, user stories, BRDs, or mixed artifacts.
-- Extract the business objective, actors, process scope, module or application name, constraints, and any named integrations.
-- Distinguish confirmed facts from inferred material.
-- If the input is sparse, make reasonable assumptions to keep momentum, but label them clearly in the document.
-- Do not invent product capabilities that conflict with the provided source.
+- **16 standard sections** — title page, overview, functional overview, system architecture, functional requirements, use cases, UI/UX requirements, data requirements, business rules, integration requirements, security requirements, non-functional requirements, reporting requirements, testing considerations, traceability matrix, version history
+- **ServiceNow tables** — `incident`, `task`, `sc_req_item`, `sc_task`, `sys_user`, `cmdb_ci`, or custom scoped tables (only when relevant to the requested module)
+- **Personas** — requester, fulfiller, agent, assignment group, approver, admin, integration user, reporting consumer
+- **Integration specifics** — direction, trigger, payload theme, frequency, authentication style, failure handling, reconciliation behavior
+- **Platform constraints** — scoped app boundaries, ACL expectations, workspace usage, portal experience, CMDB dependencies, auditability
 
-## Build The FRD
+## Prerequisite Knowledge and Guidelines
 
-- Always produce all 16 standard sections.
-- Read [references/frd-sections.md](references/frd-sections.md) before drafting the document body. Use it as the minimum content checklist for each section.
-- Keep the writing implementation-ready. Prefer specific statements over vague business prose.
-- Convert raw notes into structured requirements, use cases, rule statements, data definitions, and acceptance-oriented testing considerations.
-- When the source does not provide enough detail for a section, add a concise assumption, dependency, open question, or `TBD` marker instead of leaving the section empty.
-- Use tables where they improve clarity, especially for functional requirements, roles, data elements, integrations, reports, traceability, and version history.
+- The first time this skill is invoked in a session, confirm whether the request is ServiceNow-specific or generic. Apply ServiceNow enrichment only when the domain clearly warrants it — do not force ServiceNow vocabulary into non-ServiceNow requests.
+- Always distinguish confirmed facts from inferred material. Label assumptions explicitly using the word **Assumption:** or mark gaps as `TBD` — never silently invent capabilities.
+- Use tables wherever they improve clarity: functional requirements, roles, data elements, integrations, reports, traceability matrix, and version history all benefit from tabular formatting.
+- Write implementation-ready content. Prefer specific, actionable statements over vague business prose so development teams can build directly from the document.
 
-## Apply ServiceNow Enrichment
+## For Any Task — Always Start Here
 
-- Use ServiceNow-specific content only when the request concerns ServiceNow or a workflow that clearly maps to it.
-- Include likely tables such as `incident`, `task`, `sc_req_item`, `sc_task`, `sys_user`, `cmdb_ci`, or custom scoped tables only when relevant to the requested module.
-- Describe personas in ServiceNow terms when appropriate, such as requester, fulfiller, agent, assignment group, approver, admin, integration user, and reporting consumer.
-- Convert process logic into explicit business rules, flow logic, notifications, approvals, SLAs, data policies, and integration touchpoints when those are implied by the request.
-- Mention integrations concretely: direction, trigger, payload theme, frequency, authentication style, failure handling, and reconciliation behavior.
-- Call out platform constraints or assumptions when needed, such as scoped app boundaries, ACL expectations, workspace usage, portal experience, CMDB dependencies, or auditability requirements.
-- Do not force ServiceNow vocabulary into a non-ServiceNow request.
+- Start by reading the source input carefully: extract the business objective, actors, process scope, module name, constraints, and named integrations.
+- Continue by reading `references/frd-sections.md` to confirm the minimum content bar for each of the 16 sections before drafting anything.
+- Draft all 16 sections in order, filling gaps with explicit assumptions or `TBD` markers rather than omitting sections.
+- Once content is complete, invoke the Documents (`docx`) skill to render the final `.docx` file and visually verify heading hierarchy, table formatting, and label consistency.
+- Deliver the named `.docx` file as the final output — do not stop at markdown or notes.
 
-## Create The Word Deliverable
+## If a Section Cannot Be Completed
 
-- Produce the final artifact as a `.docx` file.
-- If the Documents skill is available, use it to create or edit the Word document and visually verify the rendered output.
-- Preserve clear heading hierarchy, readable tables, and consistent labels across all 16 sections.
-- Name the output file to reflect the module or process, for example `Incident-Management-FRD.docx` or `Employee-Onboarding-FRD.docx`.
-- Ensure the final document is review-ready, not just a content dump.
+Do **not** leave a section empty or skip it. Instead:
 
-## Quality Bar
+- Add a concise **Assumption:** statement if a reasonable inference can be made
+- Add an **Open Question:** marker if the gap requires stakeholder input
+- Add `TBD` if the information is simply not yet available
 
-- Keep terminology consistent across sections.
-- Ensure functional requirements map cleanly to use cases, business rules, integrations, testing considerations, and the traceability matrix.
-- Make architecture, security, reporting, and non-functional sections specific to the solution rather than generic boilerplate.
-- Surface assumptions explicitly so reviewers can resolve them quickly.
-- Prefer concise, business-friendly language that still gives implementation teams enough specificity to build from the document.
+Do **not** treat sparseness as a reason to abort — a well-structured FRD with clearly labelled gaps is more valuable to reviewers than an incomplete draft.
