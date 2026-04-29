@@ -14,6 +14,7 @@
 > The CONTEXT provided in the prompt contained a placeholder and no validated business requirements. In accordance with the non-hallucination rule, every requirement-specific decision in this document is marked `Not Provided`. The structure, methodology, and approach principles remain fully reusable and RAG-indexable.
 
 ---
+Note: An image or diagram is required for the ERD, workflow, and architecture (if applicable). These are mandatory requirements.
 
 ## 1. Executive Summary
 
@@ -94,7 +95,7 @@ Each functional area is mapped to a specific platform component with clear justi
 
 The solution operates across five logical layers. External integrations and channels connect through defined, governed entry points.
 
-Note: Image Required
+Note: Image or diagram required
 
 ```mermaid
 flowchart TB
