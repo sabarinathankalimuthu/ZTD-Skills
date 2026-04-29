@@ -25,15 +25,17 @@ Before creating ATF test cases, ensure:
 
 Before creating ATF:
 - Analyze the **use case / requirement**
+- if Story or Story number is perovide for creating the ATF , Analyze the Description and Acceptance criteria for the story and create the steps 
 - Understand the **development/configuration changes**
-- Identify all scenarios required for **sign-off**
+- Identify all scenarios required and provide the summary of the Test steps to  **sign-off**
+- After the sign-off create the ATF test using ServiceNow SDK
 
 ---
 
 ### 2. Test Case Coverage
 
 You must define **all possible scenarios**, including:
-
+Always create Positive and Negative Testcase for ATF and link it to a same Test Suite
 #### Positive Test Cases
 - Valid inputs
 - Expected successful flows
@@ -56,6 +58,7 @@ Each test case should include:
 - Pre-requisites
 - Test Steps
 - Expected Result
+-Test Suiite 
 
 ---
 
@@ -64,6 +67,7 @@ Each test case should include:
 ### 1. Use Native OOB Steps
 
 - Always prefer **Out-of-the-Box (OOB) ATF steps**
+- fill and map all the Attribute properly
 - Avoid unnecessary scripting
 - Use scripting **only when no OOB option exists**
 
@@ -171,6 +175,8 @@ Each test must cover:
 - Use **test suites for organization**
 - Ensure **end-to-end coverage**
 - Tests must be **ready for sign-off validation**
+- Test should have both the positive and Negative test and linke to 1 Test suite
+- Fill all the attribute in the OOB Test Steps
 
 ---
 
